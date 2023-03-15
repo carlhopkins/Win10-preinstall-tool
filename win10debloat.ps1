@@ -51,54 +51,12 @@ $Form.Icon                    = [System.Drawing.Icon]::FromHandle((New-Object Sy
 $Form.Width                   = $objImage.Width
 $Form.Height                  = $objImage.Height
 
-#Panel1 - Apps Install (via WinGet)
+#Panel1 - L/H Spacer
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
 $Panel1.height                   = 360
 $Panel1.width                    = 250
 $Panel1.location                 = New-Object System.Drawing.Point(5,75)
-
-$7zip                            = New-Object system.Windows.Forms.Button
-$7zip.text                       = "Install 7-Zip"
-$7zip.width                      = 205
-$7zip.height                     = 30
-$7zip.location                   = New-Object System.Drawing.Point(5,10)
-$7zip.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$adobereader                     = New-Object system.Windows.Forms.Button
-$adobereader.text                = "Install Adobe Reader DC"
-$adobereader.width               = 205
-$adobereader.height              = 30
-$adobereader.location            = New-Object System.Drawing.Point(5,50)
-$adobereader.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$gchrome                         = New-Object system.Windows.Forms.Button
-$gchrome.text                    = "Install Google Chrome"
-$gchrome.width                   = 205
-$gchrome.height                  = 30
-$gchrome.location                = New-Object System.Drawing.Point(5,90)
-$gchrome.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$vlc                             = New-Object system.Windows.Forms.Button
-$vlc.text                        = "Install VLC"
-$vlc.width                       = 205
-$vlc.height                      = 30
-$vlc.location                    = New-Object System.Drawing.Point(5,130)
-$vlc.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$NFS                             = New-Object system.Windows.Forms.Button
-$NFS.text                        = "Enable NFS"
-$NFS.width                       = 205
-$NFS.height                      = 30
-$NFS.location                    = New-Object System.Drawing.Point(5,170)
-$NFS.Font                        = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$Virtualization                  = New-Object system.Windows.Forms.Button
-$Virtualization.text             = "Enable HyperV + WSL"
-$Virtualization.width            = 205
-$Virtualization.height           = 30
-$Virtualization.location         = New-Object System.Drawing.Point(5,210)
-$Virtualization.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 #Panel2 - Actions
 
@@ -163,54 +121,12 @@ $STrayIcons.height               = 30
 $STrayIcons.location             = New-Object System.Drawing.Point(5,330)
 $STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-#Panel3 - Tools
+#Panel3 - R/H Spacer
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
 $Panel3.height                   = 360
 $Panel3.width                    = 250
 $Panel3.location                 = New-Object System.Drawing.Point(525,75)
-
-$ncpa                            = New-Object system.Windows.Forms.Button
-$ncpa.text                       = "Network Connections"
-$ncpa.width                      = 205
-$ncpa.height                     = 30
-$ncpa.location                   = New-Object System.Drawing.Point(5,10)
-$ncpa.Font                       = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$oldcontrolpanel                 = New-Object system.Windows.Forms.Button
-$oldcontrolpanel.text            = "Control Panel"
-$oldcontrolpanel.width           = 205
-$oldcontrolpanel.height          = 30
-$oldcontrolpanel.location        = New-Object System.Drawing.Point(5,50)
-$oldcontrolpanel.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$oldsoundpanel                   = New-Object system.Windows.Forms.Button
-$oldsoundpanel.text              = "Sound Panel"
-$oldsoundpanel.width             = 205
-$oldsoundpanel.height            = 30
-$oldsoundpanel.location          = New-Object System.Drawing.Point(5,90)
-$oldsoundpanel.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$oldsystempanel                  = New-Object system.Windows.Forms.Button
-$oldsystempanel.text             = "System Panel"
-$oldsystempanel.width            = 205
-$oldsystempanel.height           = 30
-$oldsystempanel.location         = New-Object System.Drawing.Point(5,130)
-$oldsystempanel.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$oldpower                        = New-Object system.Windows.Forms.Button
-$oldpower.text                   = "Power Panel"
-$oldpower.width                  = 205
-$oldpower.height                 = 30
-$oldpower.location               = New-Object System.Drawing.Point(5,170)
-$oldpower.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$restorepower                    = New-Object system.Windows.Forms.Button
-$restorepower.text               = "Restore Power Options"
-$restorepower.width              = 205
-$restorepower.height             = 30
-$restorepower.location           = New-Object System.Drawing.Point(5,210)
-$restorepower.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 # Status Panel
 
@@ -250,49 +166,10 @@ $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zo
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
-#$Panel1.controls.AddRange(@($7zip,$adobereader,$gchrome,$vlc,$NFS,$Virtualization))
 $Panel2.controls.AddRange(@($essentialtweaks,$essentialundo,$windowssearch,$backgroundapps,$cortana,$removebloat,$actioncenter,$onedrive,$STrayIcons))
-#$Panel3.controls.AddRange(@($ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$oldpower,$restorepower))
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
-$gchrome.Add_Click({
-    Write-Host "Installing Google Chrome"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Google Chrome... Please Wait" 
-    winget install -e Google.Chrome | Out-Host
-    if($?) { Write-Host "Installed Google Chrome" }
-    $ResultText.text = "`r`n" + "Finished Installing Google Chrome" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$adobereader.Add_Click({
-    Write-Host "Installing Adobe Reader DC"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Adobe Reader DC... Please Wait" 
-    winget install -e --id Adobe.Acrobat.Reader.64-bit | Out-Host
-    if($?) { Write-Host "Installed Adobe Reader DC" }
-    $ResultText.text = "`r`n" + "Finished Installing Adobe Reader DC" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$vlc.Add_Click({
-    Write-Host "Installing VLC Media Player"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing VLC Media Player... Please Wait" 
-    winget install -e VideoLAN.VLC | Out-Host
-    if($?) { Write-Host "Installed VLC Media Player" }
-    $ResultText.text = "`r`n" + "Finished Installing VLC Media Player" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
-$7zip.Add_Click({
-    Write-Host "Installing 7-Zip Compression Tool"
-    $ResultText.text = "`r`n" +"`r`n" + "Installing 7-Zip Compression Tool... Please Wait" 
-    winget install -e 7zip.7zip | Out-Host
-    if($?) { Write-Host "Installed 7-Zip Compression Tool" }
-    $ResultText.text = "`r`n" + "Finished Installing 7-Zip Compression Tool" + "`r`n" + "`r`n" + "Ready for Next Task"
-})
-
 $essentialtweaks.Add_Click({
-    #Write-Host "Creating Restore Point incase something bad happens"
-    #$ResultText.text = "`r`n" +"`r`n" + "Installing Essential Tools... Please Wait" 
-    #Enable-ComputerRestore -Drive "C:\"
-    #Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
-
     Write-Host "Running O&O Shutup with Recommended Settings"
     $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
     Import-Module BitsTransfer
@@ -440,7 +317,7 @@ $essentialtweaks.Add_Click({
     Write-Host "Hiding 3D Objects icon from This PC..."
     Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" -Recurse -ErrorAction SilentlyContinue
 
-    # reuducing ram via regedit
+    # reducing ram via regedit
     Write-Host "Using regedit to improve RAM performace"
 
     Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type Hex -Value 00000000
@@ -928,63 +805,6 @@ $STrayIcons.Add_Click({
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
 	Write-Host "Done - Now showing all tray icons"
     $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
-})
-
-$ncpa.Add_Click({
-    cmd /c ncpa.cpl
-})
-
-$oldsoundpanel.Add_Click({
-    cmd /c mmsys.cpl
-})
-
-$oldcontrolpanel.Add_Click({
-    cmd /c control
-})
-
-$oldsystempanel.Add_Click({
-    cmd /c sysdm.cpl
-})
-
-$oldpower.Add_Click({
-    cmd /c powercfg.cpl
-})
-
-$restorepower.Add_Click({
-    powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
-    powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
-    powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
-    Write-Host "Restored all power plans: Balanced, High Performance, and Power Saver"
-    $ResultText.text = "`r`n" +"`r`n" + "Restored all power plans: Balanced, High Performance, and Power Saver"
-})
-
-$NFS.Add_Click({
-    Enable-WindowsOptionalFeature -Online -FeatureName "ServicesForNFS-ClientOnly" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "ClientForNFS-Infrastructure" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "NFS-Administration" -All
-    nfsadmin client stop
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousUID" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default" -Name "AnonymousGID" -Type DWord -Value 0
-    nfsadmin client start
-    nfsadmin client localhost config fileaccess=755 SecFlavors=+sys -krb5 -krb5i
-    Write-Host "NFS is now setup for user based NFS mounts"
-    $ResultText.text = "`r`n" +"`r`n" + "NFS is now setup for user based NFS mounts"
-})
-
-$Virtualization.Add_Click({
-    Enable-WindowsOptionalFeature -Online -FeatureName "HypervisorPlatform" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "VirtualMachinePlatform" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Windows-Subsystem-Linux" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-All" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Tools-All" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-PowerShell" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Hypervisor" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Services" -All
-    Enable-WindowsOptionalFeature -Online -FeatureName "Microsoft-Hyper-V-Management-Clients" -All
-    cmd /c bcdedit /set hypervisorschedulertype classic
-    Write-Host "HyperV is now installed and configured. Please Reboot before using."
-    $ResultText.text = "`r`n" +"`r`n" + "HyperV is now installed and configured. Please Reboot before using."
 })
 
 [void]$Form.ShowDialog()
