@@ -250,9 +250,9 @@ $PictureBox1.imageLocation       = "https://irp.cdn-website.com/303ea353/dms3rep
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
-$Panel1.controls.AddRange(@($7zip,$adobereader,$gchrome,$vlc,$NFS,$Virtualization))
+#$Panel1.controls.AddRange(@($7zip,$adobereader,$gchrome,$vlc,$NFS,$Virtualization))
 $Panel2.controls.AddRange(@($essentialtweaks,$essentialundo,$windowssearch,$backgroundapps,$cortana,$removebloat,$actioncenter,$onedrive,$STrayIcons))
-$Panel3.controls.AddRange(@($ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$oldpower,$restorepower))
+#$Panel3.controls.AddRange(@($ncpa,$oldcontrolpanel,$oldsoundpanel,$oldsystempanel,$oldpower,$restorepower))
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 $gchrome.Add_Click({
@@ -552,12 +552,12 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     #"BrokerInfrastructure"                         #Disables Windows infrastructure service that controls which background tasks can run on the system.
     "SCardSvr"                                      #Disables Windows smart card
     "EntAppSvc"                                     #Disables enterprise application management.
-    "BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
+    #"BthAvctpSvc"                                   #Disables AVCTP service (if you use  Bluetooth Audio Device or Wireless Headphones. then don't disable this)
     #"FrameServer"                                   #Disables Windows Camera Frame Server(this allows multiple clients to access video frames from camera devices.)
     "Browser"                                       #Disables computer browser
     "BthAvctpSvc"                                   #AVCTP service (This is Audio Video Control Transport Protocol service.)
     #"BDESVC"                                        #Disables bitlocker
-    "iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
+    #"iphlpsvc"                                      #Disables ipv6 but most websites don't use ipv6 they use ipv4     
     "edgeupdate"                                    # Disables one of edge update service  
     "MicrosoftEdgeElevationService"                 # Disables one of edge  service 
     "edgeupdatem"                                   # disbales another one of update service (disables edgeupdatem)                          
@@ -573,7 +573,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "WpnService"                                    #Disables WpnService (Push Notifications may not work )
     #"StorSvc"                                       #Disables StorSvc (usb external hard drive will not be reconised by windows)
     "RtkBtManServ"                                  #Disables Realtek Bluetooth Device Manager Service
-    "QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
+    #"QWAVE"                                         #Disables Quality Windows Audio Video Experience (audio and video might sound worse)
      #Hp services
     "HPAppHelperCap"
     "HPDiagsCap"
@@ -581,7 +581,7 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies
     "HPSysInfoCap"
     "HpTouchpointAnalyticsService"
     #hyper-v services
-     "HvHost"                          
+    "HvHost"                          
     "vmickvpexchange"
     "vmicguestinterface"
     "vmicshutdown"
