@@ -30,7 +30,7 @@ else{
 
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
-$Form.text                       = "Total Control Services - Windows 10 Pre-Installation Tool"
+$Form.text                       = "Windows 10 Pre-Installation Tool"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
 $Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
@@ -245,8 +245,8 @@ $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
 $PictureBox1.location            = New-Object System.Drawing.Point(165,15)
-$PictureBox1.imageLocation       = "https://irp.cdn-website.com/303ea353/dms3rep/multi/TC+logo+only+Positive+RGB+-+SharpUS.png?raw=true"
-#$PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/header.jpg"
+$PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
@@ -293,12 +293,12 @@ $essentialtweaks.Add_Click({
     #Enable-ComputerRestore -Drive "C:\"
     #Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
-    #Write-Host "Running O&O Shutup with Recommended Settings"
-    #$ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
-    #Import-Module BitsTransfer
-    #Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/win10script/master/ooshutup10.cfg" -Destination ooshutup10.cfg
-    #Start-BitsTransfer -Source "https://dl5.oo-software.com/files/ooshutup10/OOSU10.exe" -Destination OOSU10.exe
-    #./OOSU10.exe ooshutup10.cfg /quiet
+    Write-Host "Running O&O Shutup with Recommended Settings"
+    $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
+    Import-Module BitsTransfer
+    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
+    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/OOSU10.exe" -Destination OOSU10.exe
+    ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
     $ResultText.text += "`r`n" +"Disabling Telemetry..."
