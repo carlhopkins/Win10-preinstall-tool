@@ -245,7 +245,7 @@ $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
 $PictureBox1.location            = New-Object System.Drawing.Point(165,15)
-$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/header.jpg"
+$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header.jpg"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
