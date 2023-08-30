@@ -1,4 +1,5 @@
 # Windows 10 Debloat Script - Lite version - Copyright (c) 2022 Carl Hopkins
+# Version 2.0.2 - 30.08.23
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
