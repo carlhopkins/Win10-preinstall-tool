@@ -1,6 +1,6 @@
 ## Windows 10 Pre-Installation De-Bloat Tool's ##
 
-See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for EXE versions - **recommended**.
+See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for binary versions - **recommended**.
 
 Alternatively you can call scripts directly within Powershell using the below:- 
 
