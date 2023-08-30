@@ -14,7 +14,9 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Loading, please wait..."
 
-# Check if winget is installed (Dont think this is required any longer? - CBH)
+# Not required? - CBH
+
+# Check if winget is installed 
 #if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
 #    'Winget Already Installed'
 #}  

@@ -14,21 +14,6 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Loading, please wait..."
 
-# Check if winget is installed (Dont think this is required any longer? - CBH)
-#if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-#    'Winget Already Installed'
-#}  
-#else{
-#    # Installing winget from the Microsoft Store
-#	Write-Host "Winget not found, installing it now."
-#    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-#	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-#	$nid = (Get-Process AppInstaller).Id
-#	Wait-Process -Id $nid
-#	Write-Host Winget Installed
-#   $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
-#}
-
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
 $Form.text                       = "Windows 10 De-Bloat - Lite Edition"
@@ -171,12 +156,6 @@ $Panel2.controls.AddRange(@($essentialtweaks,$essentialundo,$windowssearch,$back
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 $essentialtweaks.Add_Click({
-#    Write-Host "Running O&O Shutup with Recommended Settings"
-#    $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
-#    Import-Module BitsTransfer
-#    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
-#    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/OOSU10.exe" -Destination OOSU10.exe
-#    ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
     $ResultText.text += "`r`n" +"Disabling Telemetry..."
