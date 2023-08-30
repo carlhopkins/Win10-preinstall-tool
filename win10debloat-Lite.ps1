@@ -1,36 +1,37 @@
+# Windows 10 Debloat Script - Lite version - Copyright (c) 2022 Carl Hopkins
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 $ErrorActionPreference = 'SilentlyContinue'
 $wshell = New-Object -ComObject Wscript.Shell
-$Button = [System.Windows.MessageBoxButton]::YesNoCancel
-$ErrorIco = [System.Windows.MessageBoxImage]::Error
+$Button = [System.Windows.MessageBoxButton]::YesNoCancel # Not required? - CBH
+$ErrorIco = [System.Windows.MessageBoxImage]::Error # Not required? - CBH
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]'Administrator')) {
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
 }
 
 # GUI Specs
-Write-Host "Checking winget..."
+Write-Host "Loading, please wait..."
 
-# Check if winget is installed
-if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-    'Winget Already Installed'
-}  
-else{
-    # Installing winget from the Microsoft Store
-	Write-Host "Winget not found, installing it now."
-    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-	$nid = (Get-Process AppInstaller).Id
-	Wait-Process -Id $nid
-	Write-Host Winget Installed
-    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
-}
+# Check if winget is installed (Dont think this is required any longer? - CBH)
+#if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
+#    'Winget Already Installed'
+#}  
+#else{
+#    # Installing winget from the Microsoft Store
+#	Write-Host "Winget not found, installing it now."
+#    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
+#	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
+#	$nid = (Get-Process AppInstaller).Id
+#	Wait-Process -Id $nid
+#	Write-Host Winget Installed
+#   $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
+#}
 
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
-$Form.text                       = "Windows 10 Pre-Installation Tool"
+$Form.text                       = "Windows 10 De-Bloat - Lite Edition"
 $Form.StartPosition              = "CenterScreen"
 $Form.TopMost                    = $false
 $Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
@@ -161,7 +162,7 @@ $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
 $PictureBox1.location            = New-Object System.Drawing.Point(165,15)
-$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header.jpg"
+$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_lite.jpg"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
@@ -170,12 +171,12 @@ $Panel2.controls.AddRange(@($essentialtweaks,$essentialundo,$windowssearch,$back
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 $essentialtweaks.Add_Click({
-    Write-Host "Running O&O Shutup with Recommended Settings"
-    $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
-    Import-Module BitsTransfer
-    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
-    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/OOSU10.exe" -Destination OOSU10.exe
-    ./OOSU10.exe ooshutup10.cfg /quiet
+#    Write-Host "Running O&O Shutup with Recommended Settings"
+#    $ResultText.text += "`r`n" +"Running O&O Shutup with Recommended Settings"
+#    Import-Module BitsTransfer
+#    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
+#    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/OOSU10.exe" -Destination OOSU10.exe
+#    ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
     $ResultText.text += "`r`n" +"Disabling Telemetry..."
