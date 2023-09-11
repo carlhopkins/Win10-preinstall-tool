@@ -113,7 +113,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 $Panel4                          = New-Object system.Windows.Forms.Panel
 $Panel4.height                   = 125
 $Panel4.width                    = 730
-$Panel4.location                 = New-Object System.Drawing.Point(5,360)
+$Panel4.location                 = New-Object System.Drawing.Point(5,430)
 
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
@@ -460,7 +460,6 @@ foreach ($service in $services) {
     Write-Host "Essential Tweaks Completed - Please Reboot"
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
-
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
