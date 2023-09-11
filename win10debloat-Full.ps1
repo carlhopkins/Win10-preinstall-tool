@@ -1,5 +1,5 @@
 # Windows 10 Debloat Script - Full version including O&O Shutup - Copyright (c) 2022 Carl Hopkins
-# Version 2.0.2 - 30.08.23
+
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
@@ -14,23 +14,6 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
 # GUI Specs
 Write-Host "Loading, please wait..."
-
-# Not required? - CBH
-
-# Check if winget is installed 
-#if (Test-Path ~\AppData\Local\Microsoft\WindowsApps\winget.exe){
-#    'Winget Already Installed'
-#}  
-#else{
-    # Installing winget from the Microsoft Store
-#	Write-Host "Winget not found, installing it now."
-#    $ResultText.text = "`r`n" +"`r`n" + "Installing Winget... Please Wait"
-#	Start-Process "ms-appinstaller:?source=https://aka.ms/getwinget"
-#	$nid = (Get-Process AppInstaller).Id
-#	Wait-Process -Id $nid
-#	Write-Host Winget Installed
-#    $ResultText.text = "`r`n" +"`r`n" + "Winget Installed - Ready for Next Task"
-#}
 
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
@@ -76,53 +59,46 @@ $essentialtweaks.height          = 70
 $essentialtweaks.location        = New-Object System.Drawing.Point(5,10)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$essentialundo                   = New-Object system.Windows.Forms.Button
-$essentialundo.text              = "Undo Essential Tweaks"
-$essentialundo.width             = 205
-$essentialundo.height            = 30
-$essentialundo.location          = New-Object System.Drawing.Point(5,90)
-$essentialundo.Font              = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
 $actioncenter                    = New-Object system.Windows.Forms.Button
 $actioncenter.text               = "Disable Action Center"
 $actioncenter.width              = 205
 $actioncenter.height             = 30
-$actioncenter.location           = New-Object System.Drawing.Point(5,130)
+$actioncenter.location           = New-Object System.Drawing.Point(5,90)
 $actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Disable Background Apps"
 $backgroundapps.width            = 205
 $backgroundapps.height           = 30
-$backgroundapps.location         = New-Object System.Drawing.Point(5,170)
+$backgroundapps.location         = New-Object System.Drawing.Point(5,130)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $cortana                         = New-Object system.Windows.Forms.Button
 $cortana.text                    = "Disable Cortana (Search)"
 $cortana.width                   = 205
 $cortana.height                  = 30
-$cortana.location                = New-Object System.Drawing.Point(5,210)
+$cortana.location                = New-Object System.Drawing.Point(5,170)
 $cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $onedrive                        = New-Object system.Windows.Forms.Button
 $onedrive.text                   = "Delete & Disable  OneDrive"
 $onedrive.width                  = 205
 $onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(5,250)
+$onedrive.location               = New-Object System.Drawing.Point(5,210)
 $onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Bloatware"
 $removebloat.width               = 205
 $removebloat.height              = 30
-$removebloat.location            = New-Object System.Drawing.Point(5,290)
+$removebloat.location            = New-Object System.Drawing.Point(5,250)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $STrayIcons                      = New-Object system.Windows.Forms.Button
 $STrayIcons.text                 = "Show Tray Icons"
 $STrayIcons.width                = 205
 $STrayIcons.height               = 30
-$STrayIcons.location             = New-Object System.Drawing.Point(5,330)
+$STrayIcons.location             = New-Object System.Drawing.Point(5,290)
 $STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 #Panel3 - R/H Spacer
@@ -137,7 +113,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 $Panel4                          = New-Object system.Windows.Forms.Panel
 $Panel4.height                   = 125
 $Panel4.width                    = 730
-$Panel4.location                 = New-Object System.Drawing.Point(5,460)
+$Panel4.location                 = New-Object System.Drawing.Point(5,360)
 
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
@@ -170,7 +146,7 @@ $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zo
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
-$Panel2.controls.AddRange(@($essentialtweaks,$essentialundo,$windowssearch,$backgroundapps,$cortana,$removebloat,$actioncenter,$onedrive,$STrayIcons))
+$Panel2.controls.AddRange(@($essentialtweaks,$windowssearch,$backgroundapps,$cortana,$removebloat,$actioncenter,$onedrive,$STrayIcons))
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 $essentialtweaks.Add_Click({
@@ -485,120 +461,6 @@ foreach ($service in $services) {
     $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
 })
 
-$essentialundo.Add_Click({
-    Write-Host "Creating Restore Point incase something bad happens"
-    $ResultText.text = "`r`n" +"`r`n" + "Creating Restore Point and Reverting Settings... Please Wait"
-    Enable-ComputerRestore -Drive "C:\"
-    Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
-
-    Write-Host "Enabling Telemetry..."
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 1
-    Write-Host "Enabling Wi-Fi Sense"
-    Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Name "Value" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 1
-    Write-Host "Enabling Application suggestions..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEverEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338387Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338388Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 1
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
-        Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Recurse -ErrorAction SilentlyContinue
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableWindowsConsumerFeatures" -Type DWord -Value 0
-    Write-Host "Enabling Activity History..."
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "EnableActivityFeed" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "PublishUserActivities" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "UploadUserActivities" -Type DWord -Value 1
-    Write-Host "Enable Location Tracking..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location")) {
-        Remove-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Recurse -ErrorAction SilentlyContinue
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Name "Value" -Type String -Value "Allow"
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" -Name "SensorPermissionState" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\lfsvc\Service\Configuration" -Name "Status" -Type DWord -Value 1
-    Write-Host "Enabling automatic Maps updates..."
-    Set-ItemProperty -Path "HKLM:\SYSTEM\Maps" -Name "AutoUpdateEnabled" -Type DWord -Value 1
-    Write-Host "Enabling Feedback..."
-    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules")) {
-        Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules" -Recurse -ErrorAction SilentlyContinue
-    }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Siuf\Rules" -Name "NumberOfSIUFInPeriod" -Type DWord -Value 0
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "DoNotShowFeedbackNotifications" -Type DWord -Value 0
-    Write-Host "Enabling Tailored Experiences..."
-    If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
-        Remove-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Recurse -ErrorAction SilentlyContinue
-    }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableTailoredExperiencesWithDiagnosticData" -Type DWord -Value 0
-    Write-Host "Disabling Advertising ID..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")) {
-        Remove-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Recurse -ErrorAction SilentlyContinue
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Name "DisabledByGroupPolicy" -Type DWord -Value 0
-    Write-Host "Allow Error reporting..."
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting" -Name "Disabled" -Type DWord -Value 0
-    Write-Host "Allowing Diagnostics Tracking Service..."
-    Stop-Service "DiagTrack" -WarningAction SilentlyContinue
-    Set-Service "DiagTrack" -StartupType Manual
-    Write-Host "Allowing WAP Push Service..."
-    Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
-    Set-Service "dmwappushservice" -StartupType Manual
-    Write-Host "Allowing Home Groups services..."
-    Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
-    Set-Service "HomeGroupListener" -StartupType Manual
-    Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
-    Set-Service "HomeGroupProvider" -StartupType Manual
-    Write-Host "Enabling Storage Sense..."
-    New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" | Out-Null
-    Write-Host "Allowing Superfetch service..."
-    Stop-Service "SysMain" -WarningAction SilentlyContinue
-    Set-Service "SysMain" -StartupType Manual
-    Write-Host "Setting BIOS time to Local Time instead of UTC..."
-    Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 0
-    Write-Host "Enabling Hibernation..."
-    Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 1
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 1
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -ErrorAction SilentlyContinue
-
-    Write-Host "Hiding file operations details..."
-    If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
-        Remove-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Recurse -ErrorAction SilentlyContinue
-    }
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 0
-    Write-Host "Showing Task View button..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 1
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 1
-
-    Write-Host "Changing default Explorer view to Quick Access..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
-
-    Write-Host "Unrestricting AutoLogger directory"
-    $autoLoggerDir = "$env:PROGRAMDATA\Microsoft\Diagnosis\ETLLogs\AutoLogger"
-    icacls $autoLoggerDir /grant:r SYSTEM:`(OI`)`(CI`)F | Out-Null
-
-    Write-Host "Enabling and starting Diagnostics Tracking Service"
-    Set-Service "DiagTrack" -StartupType Automatic
-    Start-Service "DiagTrack"
-
-    Write-Host "Hiding known file extensions"
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "HideFileExt" -Type DWord -Value 1
-
-    Write-Host "Reset Local Group Policies to Stock Defaults"
-    # cmd /c secedit /configure /cfg %windir%\inf\defltbase.inf /db defltbase.sdb /verbose
-    cmd /c RD /S /Q "%WinDir%\System32\GroupPolicyUsers"
-    cmd /c RD /S /Q "%WinDir%\System32\GroupPolicy"
-    cmd /c gpupdate /force
-    # Considered using Invoke-GPUpdate but requires module most people won't have installed
-
-    Write-Host "Essential Undo Completed"
-    $ResultText.text = "`r`n" +"`r`n" + "Essential Undo Completed - Ready for next task"
-})
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
