@@ -15,6 +15,14 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Loading, please wait..."
 
+# Hack to load in required resources
+Import-Module BitsTransfer
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/OOSU10.exe" -Destination OOSU10.exe
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_full.jpg" -Destination hfimage.jpg
+Add-Type -Assembly System.Drawing
+$himage = [System.Drawing.Image]::FromFile("./hfimage.jpg")
+
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
 $Form.text                       = "Windows 10 De-Bloat - Full Edition"
@@ -134,7 +142,7 @@ $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
 $PictureBox1.location            = New-Object System.Drawing.Point(168,15)
-$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_full.jpg"
+$PictureBox1.image               = $himage
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
@@ -145,9 +153,6 @@ $Panel4.controls.AddRange(@($Label10,$ResultText))
 $essentialtweaks.Add_Click({
     Write-Host "Running O&O Shutup with Customised Settings"
     $ResultText.text += "`r`n" +"Running O&O Shutup with Customised Settings"
-    Import-Module BitsTransfer
-    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
-    Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/OOSU10.exe" -Destination OOSU10.exe
     ./OOSU10.exe ooshutup10.cfg /quiet
 
     Write-Host "Disabling Telemetry..."
