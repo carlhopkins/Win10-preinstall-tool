@@ -15,6 +15,12 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Loading, please wait..."
 
+# Hack to load image for warp button
+Import-Module BitsTransfer
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/bimage.jpg" -Destination bimage.jpg
+Add-Type -Assembly System.Drawing
+$bimage = [System.Drawing.Image]::FromFile("./bimage.jpg")
+
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
 $Form.text                       = "Windows 10 De-Bloat - Warp Edition"
@@ -29,9 +35,9 @@ $Form.ClientSize              = '700, 700'
 $Form.FormBorderStyle         = 'FixedSingle'
 
 # GUI Icon
-$iconBase64                      = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAACQcICgP/xAArEAABBAEDAwQCAQUAAAAAAAACAQMEBQYHERIICSEAExQxFSIKIzI0QVL/xAAXAQEBAQEAAAAAAAAAAAAAAAAFBgME/8QAJhEAAQMDBAEEAwAAAAAAAAAAAQIDEQQhQQASEzFhBTJxsVGBof/aAAwDAQACEQMRAD8AIftadvXIO5x1l43pfSPFX17/ACsshtNuX4eqZIPkSETZeTn7g22K+CddaFVEVUkVTux9nbpX0H6akwzSvHa2t1SeciN0NxOzRCsLQkIVkuvtvzEB9tW+QezDhk97ytcARHUQol/j9dLDOSdLma5NgGqcii1eyt5ytt6KqajfmnscZQnEi15STBlqVMmsttrIdVWmWxEk4ueUtHpv0hysBnu2GsF5f6d2V8qvHpTp3fK7k89l5OCOZNlH+ZIdfBFQ2mjBokIvabb5mCcrz6wdrSZ8/f7HkjwZtpajoWFNl2pc2xjJnrBgHBAWclITBI662doHXzQ7TyVl0zBrS2xeBDCxl2FfFfQosUt0SScZ9tqSkfx5f9r2U8fv59Vk9bDejzt36OaC48zm1XpPhMHLrxPl/k3o62Vg0BqLgmU6abzxOEoi6rnJPKjsA7KPo4v5MHVjozhXT9d6Y1lDp/I1SyWYw40DGP1cuVTRUdRx6X8mO2BxH3eKCPMjNwHDXYBLdd29+0ckT40fUcXIeCduJif592+B1o0+lnXO+046Za9msqcaF6vsfkVmRNocO/oZTjj5/wBF1kh+QyYRDEgeQxFVT73BBYPpszKlmTcbyLJnZF7Gmz0tLUn+KyrNFdVH+SGXEjFxDbJOXFCbUd+O3rPnpzrW/h9IVTKbORAVV9sgVOcfflvsi+C8kq/afa+fO3qwrXc8XHqMo8GDbyJDpe86rNg/AZfd4oPuOA25sp7IiKSJuqJ6mFvepUlYSGS42qfaUgi8gmSBkgyZ6idVCW/TayiSkvBtxEe4Eg2ggRJ7AIgRc6Y7uVdxHJcxr7FWbayxHCW1QINRWH7V5kbg+difaUkbHluqttucUHZTJf7EAfq+yocs1NSQTsU5StkUhuOSE3GJTXi2ip/yKCnnz9KvlV9dNYetHONYJskn7A61mVuLiRnCV94F+hdfJVdc2Tx+xfXj1EpEpLuvlV8qq/79L06at10PPgISOkgyZOVGw6wJ+ToV9ylaaUxTysqiVEQIF4SLmJyYn8DX/9k='
-$iconBytes                       = [Convert]::FromBase64String($iconBase64)
-$stream                          = New-Object IO.MemoryStream($iconBytes, 0, $iconBytes.Length)
+$iconBase64                   = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAACQcICgP/xAArEAABBAEDAwQCAQUAAAAAAAACAQMEBQYHERIICSEAExQxFSIKIzI0QVL/xAAXAQEBAQEAAAAAAAAAAAAAAAAFBgME/8QAJhEAAQMDBAEEAwAAAAAAAAAAAQIDEQQhQQASEzFhBTJxsVGBof/aAAwDAQACEQMRAD8AIftadvXIO5x1l43pfSPFX17/ACsshtNuX4eqZIPkSETZeTn7g22K+CddaFVEVUkVTux9nbpX0H6akwzSvHa2t1SeciN0NxOzRCsLQkIVkuvtvzEB9tW+QezDhk97ytcARHUQol/j9dLDOSdLma5NgGqcii1eyt5ytt6KqajfmnscZQnEi15STBlqVMmsttrIdVWmWxEk4ueUtHpv0hysBnu2GsF5f6d2V8qvHpTp3fK7k89l5OCOZNlH+ZIdfBFQ2mjBokIvabb5mCcrz6wdrSZ8/f7HkjwZtpajoWFNl2pc2xjJnrBgHBAWclITBI662doHXzQ7TyVl0zBrS2xeBDCxl2FfFfQosUt0SScZ9tqSkfx5f9r2U8fv59Vk9bDejzt36OaC48zm1XpPhMHLrxPl/k3o62Vg0BqLgmU6abzxOEoi6rnJPKjsA7KPo4v5MHVjozhXT9d6Y1lDp/I1SyWYw40DGP1cuVTRUdRx6X8mO2BxH3eKCPMjNwHDXYBLdd29+0ckT40fUcXIeCduJif592+B1o0+lnXO+046Za9msqcaF6vsfkVmRNocO/oZTjj5/wBF1kh+QyYRDEgeQxFVT73BBYPpszKlmTcbyLJnZF7Gmz0tLUn+KyrNFdVH+SGXEjFxDbJOXFCbUd+O3rPnpzrW/h9IVTKbORAVV9sgVOcfflvsi+C8kq/afa+fO3qwrXc8XHqMo8GDbyJDpe86rNg/AZfd4oPuOA25sp7IiKSJuqJ6mFvepUlYSGS42qfaUgi8gmSBkgyZ6idVCW/TayiSkvBtxEe4Eg2ggRJ7AIgRc6Y7uVdxHJcxr7FWbayxHCW1QINRWH7V5kbg+difaUkbHluqttucUHZTJf7EAfq+yocs1NSQTsU5StkUhuOSE3GJTXi2ip/yKCnnz9KvlV9dNYetHONYJskn7A61mVuLiRnCV94F+hdfJVdc2Tx+xfXj1EpEpLuvlV8qq/79L06at10PPgISOkgyZOVGw6wJ+ToV9ylaaUxTysqiVEQIF4SLmJyYn8DX/9k='
+$iconBytes                    = [Convert]::FromBase64String($iconBase64)
+$stream                       = New-Object IO.MemoryStream($iconBytes, 0, $iconBytes.Length)
 $stream.Write($iconBytes, 0, $iconBytes.Length)
 $Form.Icon                    = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
@@ -53,7 +59,8 @@ $Panel2.width                    = 250
 $Panel2.location                 = New-Object System.Drawing.Point(265,75)
 
 $warptweaks                      = New-Object system.Windows.Forms.Button
-$warptweaks.text                 = "Run Essential Tweaks"
+#$warptweaks.text                 = "Run Essential Tweaks"
+$warptweaks.Image                = $bimage
 $warptweaks.width                = 205
 $warptweaks.height               = 205
 $warptweaks.location             = New-Object System.Drawing.Point(5,10)
@@ -106,6 +113,8 @@ $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
 $Panel2.controls.AddRange(@($warptweaks))
 $Panel4.controls.AddRange(@($Label10,$ResultText))
+
+#Main routine, options as per "Lite" but more verbose and chained into one single function.
 
 $warptweaks.Add_Click({
 

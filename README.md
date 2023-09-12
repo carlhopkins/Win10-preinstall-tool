@@ -12,4 +12,8 @@ Alternatively you can call scripts directly within Powershell using the below:-
 
 <code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/win10debloat-Lite.ps1 | iex</code>
 
+**Warp** version, Windows 10 tweaks only, *warp speed!* one-click version
+
+<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/win10debloat-Warp.ps1 | iex</code>
+
 Copyright (c) 2022 Carl Hopkins
