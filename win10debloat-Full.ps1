@@ -41,14 +41,14 @@ $Form.Height                  = $objImage.Height
 #Panel1 - L/H Spacer
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 360
+$Panel1.height                   = 310
 $Panel1.width                    = 250
 $Panel1.location                 = New-Object System.Drawing.Point(5,75)
 
 #Panel2 - Actions
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 360
+$Panel2.height                   = 310
 $Panel2.width                    = 250
 $Panel2.location                 = New-Object System.Drawing.Point(265,75)
 
@@ -59,52 +59,45 @@ $essentialtweaks.height          = 70
 $essentialtweaks.location        = New-Object System.Drawing.Point(5,10)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$actioncenter                    = New-Object system.Windows.Forms.Button
-$actioncenter.text               = "Disable Action Center"
-$actioncenter.width              = 205
-$actioncenter.height             = 30
-$actioncenter.location           = New-Object System.Drawing.Point(5,90)
-$actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Disable Background Apps"
 $backgroundapps.width            = 205
 $backgroundapps.height           = 30
-$backgroundapps.location         = New-Object System.Drawing.Point(5,130)
+$backgroundapps.location         = New-Object System.Drawing.Point(5,90)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $cortana                         = New-Object system.Windows.Forms.Button
 $cortana.text                    = "Disable Cortana (Search)"
 $cortana.width                   = 205
 $cortana.height                  = 30
-$cortana.location                = New-Object System.Drawing.Point(5,170)
+$cortana.location                = New-Object System.Drawing.Point(5,130)
 $cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable  OneDrive"
-$onedrive.width                  = 205
-$onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(5,210)
-$onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Bloatware"
 $removebloat.width               = 205
 $removebloat.height              = 30
-$removebloat.location            = New-Object System.Drawing.Point(5,250)
+$removebloat.location            = New-Object System.Drawing.Point(5,170)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$actioncenter                    = New-Object system.Windows.Forms.Button
+$actioncenter.text               = "Disable Action Center"
+$actioncenter.width              = 205
+$actioncenter.height             = 30
+$actioncenter.location           = New-Object System.Drawing.Point(5,210)
+$actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $STrayIcons                      = New-Object system.Windows.Forms.Button
 $STrayIcons.text                 = "Show Tray Icons"
 $STrayIcons.width                = 205
 $STrayIcons.height               = 30
-$STrayIcons.location             = New-Object System.Drawing.Point(5,290)
+$STrayIcons.location             = New-Object System.Drawing.Point(5,250)
 $STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 #Panel3 - R/H Spacer
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 360
+$Panel3.height                   = 310
 $Panel3.width                    = 250
 $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 
@@ -113,7 +106,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 $Panel4                          = New-Object system.Windows.Forms.Panel
 $Panel4.height                   = 125
 $Panel4.width                    = 730
-$Panel4.location                 = New-Object System.Drawing.Point(5,430)
+$Panel4.location                 = New-Object System.Drawing.Point(20,390)
 
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
@@ -140,7 +133,7 @@ $Panel0.location                 = New-Object System.Drawing.Point(5,5)
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
-$PictureBox1.location            = New-Object System.Drawing.Point(165,15)
+$PictureBox1.location            = New-Object System.Drawing.Point(168,15)
 $PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_full.jpg"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 

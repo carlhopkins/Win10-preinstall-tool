@@ -41,14 +41,14 @@ $Form.Height                  = $objImage.Height
 #Panel1 - L/H Spacer
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 360
+$Panel1.height                   = 310
 $Panel1.width                    = 250
 $Panel1.location                 = New-Object System.Drawing.Point(5,75)
 
 #Panel2 - Actions
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 360
+$Panel2.height                   = 310
 $Panel2.width                    = 250
 $Panel2.location                 = New-Object System.Drawing.Point(265,75)
 
@@ -59,52 +59,45 @@ $essentialtweaks.height          = 70
 $essentialtweaks.location        = New-Object System.Drawing.Point(5,10)
 $essentialtweaks.Font            = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
-$actioncenter                    = New-Object system.Windows.Forms.Button
-$actioncenter.text               = "Disable Action Center"
-$actioncenter.width              = 205
-$actioncenter.height             = 30
-$actioncenter.location           = New-Object System.Drawing.Point(5,90)
-$actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
 $backgroundapps                  = New-Object system.Windows.Forms.Button
 $backgroundapps.text             = "Disable Background Apps"
 $backgroundapps.width            = 205
 $backgroundapps.height           = 30
-$backgroundapps.location         = New-Object System.Drawing.Point(5,130)
+$backgroundapps.location         = New-Object System.Drawing.Point(5,90)
 $backgroundapps.Font             = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $cortana                         = New-Object system.Windows.Forms.Button
 $cortana.text                    = "Disable Cortana (Search)"
 $cortana.width                   = 205
 $cortana.height                  = 30
-$cortana.location                = New-Object System.Drawing.Point(5,170)
+$cortana.location                = New-Object System.Drawing.Point(5,130)
 $cortana.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
-
-$onedrive                        = New-Object system.Windows.Forms.Button
-$onedrive.text                   = "Delete & Disable  OneDrive"
-$onedrive.width                  = 205
-$onedrive.height                 = 30
-$onedrive.location               = New-Object System.Drawing.Point(5,210)
-$onedrive.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $removebloat                     = New-Object system.Windows.Forms.Button
 $removebloat.text                = "Remove MS Bloatware"
 $removebloat.width               = 205
 $removebloat.height              = 30
-$removebloat.location            = New-Object System.Drawing.Point(5,250)
+$removebloat.location            = New-Object System.Drawing.Point(5,170)
 $removebloat.Font                = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
+$actioncenter                    = New-Object system.Windows.Forms.Button
+$actioncenter.text               = "Disable Action Center"
+$actioncenter.width              = 205
+$actioncenter.height             = 30
+$actioncenter.location           = New-Object System.Drawing.Point(5,210)
+$actioncenter.Font               = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $STrayIcons                      = New-Object system.Windows.Forms.Button
 $STrayIcons.text                 = "Show Tray Icons"
 $STrayIcons.width                = 205
 $STrayIcons.height               = 30
-$STrayIcons.location             = New-Object System.Drawing.Point(5,290)
+$STrayIcons.location             = New-Object System.Drawing.Point(5,250)
 $STrayIcons.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 #Panel3 - R/H Spacer
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 360
+$Panel3.height                   = 310
 $Panel3.width                    = 250
 $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 
@@ -113,7 +106,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 $Panel4                          = New-Object system.Windows.Forms.Panel
 $Panel4.height                   = 125
 $Panel4.width                    = 730
-$Panel4.location                 = New-Object System.Drawing.Point(5,430)
+$Panel4.location                 = New-Object System.Drawing.Point(20,390)
 
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
@@ -140,13 +133,13 @@ $Panel0.location                 = New-Object System.Drawing.Point(5,5)
 $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
-$PictureBox1.location            = New-Object System.Drawing.Point(165,15)
+$PictureBox1.location            = New-Object System.Drawing.Point(168,15)
 $PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_lite.jpg"
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
-$Panel2.controls.AddRange(@($essentialtweaks,$windowssearch,$backgroundapps,$cortana,$removebloat,$actioncenter,$onedrive,$STrayIcons))
+$Panel2.controls.AddRange(@($essentialtweaks,$windowssearch,$backgroundapps,$cortana,$removebloat,$actioncenter,$STrayIcons))
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 $essentialtweaks.Add_Click({
@@ -626,36 +619,6 @@ $actioncenter.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
     Write-Host "Disabled Action Center"
     $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
-})
-
-$onedrive.Add_Click({
-    Write-Host "Disabling OneDrive..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
-    Write-Host "Uninstalling OneDrive..."
-    Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
-    Start-Sleep -s 2
-    $onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
-    If (!(Test-Path $onedrive)) {
-        $onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
-    }
-    Start-Process $onedrive "/uninstall" -NoNewWindow -Wait
-    Start-Sleep -s 2
-    Stop-Process -Name "explorer" -ErrorAction SilentlyContinue
-    Start-Sleep -s 2
-    Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse -ErrorAction SilentlyContinue
-    If (!(Test-Path "HKCR:")) {
-        New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
-    }
-    Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Write-Host "Disabled OneDrive"
-    $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
 })
 
 $STrayIcons.Add_Click({
