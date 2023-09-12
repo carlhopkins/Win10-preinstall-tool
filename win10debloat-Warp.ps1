@@ -15,11 +15,14 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 # GUI Specs
 Write-Host "Loading, please wait..."
 
-# Hack to load image for warp button
+# Hack to load in required resources
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/bimage.jpg" -Destination bimage.jpg
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_warp.jpg" -Destination hwimage.jpg
 Add-Type -Assembly System.Drawing
 $bimage = [System.Drawing.Image]::FromFile("./bimage.jpg")
+Add-Type -Assembly System.Drawing
+$himage = [System.Drawing.Image]::FromFile("./hwimage.jpg")
 
 $Form                            = New-Object system.Windows.Forms.Form
 $Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
@@ -106,7 +109,7 @@ $PictureBox1                     = New-Object system.Windows.Forms.PictureBox
 $PictureBox1.width               = 398
 $PictureBox1.height              = 38
 $PictureBox1.location            = New-Object System.Drawing.Point(168,15)
-$PictureBox1.imageLocation       = "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_warp.jpg"
+$PictureBox1.image               = $himage
 $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zoom
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
