@@ -1,4 +1,4 @@
-# Windows 10 Debloat Script - Warp version - Copyright (c) 2022 Carl Hopkins
+# Windows 10 Debloat Script - Warp version - Copyright (c) 2023 Carl Hopkins
 
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
