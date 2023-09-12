@@ -24,12 +24,12 @@ $bimage = [System.Drawing.Image]::FromFile("./bimage.jpg")
 Add-Type -Assembly System.Drawing
 $himage = [System.Drawing.Image]::FromFile("./hwimage.jpg")
 
-$Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
-$Form.text                       = "Windows 10 De-Bloat - Warp Edition"
-$Form.StartPosition              = "CenterScreen"
-$Form.TopMost                    = $false
-$Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
+$Form                         = New-Object system.Windows.Forms.Form
+$Form.ClientSize              = New-Object System.Drawing.Point(780,780)
+$Form.text                    = "Windows 10 De-Bloat - Warp Edition"
+$Form.StartPosition           = "CenterScreen"
+$Form.TopMost                 = $false
+$Form.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
 $Form.AutoScaleDimensions     = '192, 192'
 $Form.AutoScaleMode           = "Dpi"
 $Form.AutoSize                = $True
@@ -62,7 +62,6 @@ $Panel2.width                    = 250
 $Panel2.location                 = New-Object System.Drawing.Point(265,75)
 
 $warptweaks                      = New-Object system.Windows.Forms.Button
-#$warptweaks.text                 = "Run Essential Tweaks"
 $warptweaks.Image                = $bimage
 $warptweaks.width                = 205
 $warptweaks.height               = 205
@@ -79,7 +78,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 # Status Panel
 
 $Panel4                          = New-Object system.Windows.Forms.Panel
-$Panel4.height                   = 125
+$Panel4.height                   = 65
 $Panel4.width                    = 730
 $Panel4.location                 = New-Object System.Drawing.Point(20,320)
 
@@ -92,9 +91,9 @@ $Label10.location                = New-Object System.Drawing.Point(5,5)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $ResultText                      = New-Object system.Windows.Forms.TextBox
-$ResultText.multiline            = $true
+#$ResultText.multiline            = true
 $ResultText.width                = 725
-$ResultText.height               = 90
+$ResultText.height               = 40
 $ResultText.location             = New-Object System.Drawing.Point(5,25)
 $ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
@@ -120,9 +119,9 @@ $Panel4.controls.AddRange(@($Label10,$ResultText))
 #Main routine, options as per "Lite" but more verbose and chained into one single function.
 
 $warptweaks.Add_Click({
-
+    $ResultText.text = "Scotty: But ye don't have eight weeks, so I'll do it for ye in two... Cleanup in Progress"
+    
     Write-Host "Disabling Telemetry..."
-    $ResultText.text = "`r`n" +"Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
@@ -133,7 +132,6 @@ $warptweaks.Add_Click({
     Disable-ScheduledTask -TaskName "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" | Out-Null
     
     Write-Host "Disabling Wi-Fi Sense..."
-    $ResultText.text = "`r`n" +"Disabling Wi-Fi Sense..."
     If (!(Test-Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting")) {
         New-Item -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" -Force | Out-Null
     }
@@ -141,7 +139,6 @@ $warptweaks.Add_Click({
     Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" -Name "Value" -Type DWord -Value 0
     
     Write-Host "Disabling Application suggestions..."
-    $ResultText.text = "`r`n" +"Disabling Application suggestions..."
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 0
@@ -163,7 +160,6 @@ $warptweaks.Add_Click({
     
     # Keep Location Tracking commented out if you want the ability to locate your device
     Write-Host "Disabling Location Tracking..."
-    $ResultText.text = "`r`n" +"Disabling Location Tracking..."
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" -Force | Out-Null
     }
@@ -182,63 +178,52 @@ $warptweaks.Add_Click({
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" -ErrorAction SilentlyContinue | Out-Null
     
     Write-Host "Disabling Tailored Experiences..."
-    $ResultText.text = "`r`n" +"Disabling Tailored Experiences..."
     If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent")) {
         New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Force | Out-Null
     }
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CloudContent" -Name "DisableTailoredExperiencesWithDiagnosticData" -Type DWord -Value 1
     
     Write-Host "Disabling Advertising ID..."
-    $ResultText.text = "`r`n" +"Disabling Advertising ID..."
     If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo")) {
         New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo" -Name "DisabledByGroupPolicy" -Type DWord -Value 1
     
     Write-Host "Disabling Error reporting..."
-    $ResultText.text = "`r`n" +"Disabling Error reporting..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\Windows Error Reporting" -Name "Disabled" -Type DWord -Value 1
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Windows Error Reporting\QueueReporting" | Out-Null
     
     Write-Host "Restricting Windows Update P2P only to local network..."
-    $ResultText.text = "`r`n" +"Restricting Windows Update P2P only to local network..."
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" | Out-Null
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" -Name "DODownloadMode" -Type DWord -Value 1
 
     Write-Host "Stopping and disabling Diagnostics Tracking Service..."
-    $ResultText.text = "`r`n" +"Stopping and disabling Diagnostics Tracking Service..."
     Stop-Service "DiagTrack" -WarningAction SilentlyContinue
     Set-Service "DiagTrack" -StartupType Disabled
     
     Write-Host "Stopping and disabling WAP Push Service..."
-    $ResultText.text = "`r`n" +"Stopping and disabling WAP Push Service..."
     Stop-Service "dmwappushservice" -WarningAction SilentlyContinue
     Set-Service "dmwappushservice" -StartupType Disabled
     
     Write-Host "Enabling F8 boot menu options..."
-    $ResultText.text = "`r`n" +"Enabling F8 boot menu options..."
     bcdedit /set `{current`} bootmenupolicy Legacy | Out-Null
     
     Write-Host "Stopping and disabling Home Groups services..."
-    $ResultText.text = "`r`n" +"Stopping and disabling Home Groups services..."
     Stop-Service "HomeGroupListener" -WarningAction SilentlyContinue
     Set-Service "HomeGroupListener" -StartupType Disabled
     Stop-Service "HomeGroupProvider" -WarningAction SilentlyContinue
     Set-Service "HomeGroupProvider" -StartupType Disabled
     
     Write-Host "Disabling Remote Assistance..."
-    $ResultText.text = "`r`n" +"Disabling Remote Assistance..."
     Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Remote Assistance" -Name "fAllowToGetHelp" -Type DWord -Value 0
     
     Write-Host "Stopping and disabling Superfetch service..."
-    $ResultText.text = "`r`n" +"Stopping and disabling Superfetch service..."
     Stop-Service "SysMain" -WarningAction SilentlyContinue
     Set-Service "SysMain" -StartupType Disabled
     
     Write-Host "Disabling Hibernation..."
-    $ResultText.text = "`r`n" +"Disabling Hibernation..."
     Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Session Manager\Power" -Name "HibernteEnabled" -Type Dword -Value 0
     If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
         New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
@@ -256,7 +241,6 @@ $warptweaks.Add_Click({
     	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
     } else {Write-Host "Task Manager patch not run in builds 22557+ due to bug"}
     
-    $ResultText.text = "`r`n" +"Quality of Life Tweaks..."
     Write-Host "Showing file operations details..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
@@ -294,7 +278,6 @@ $warptweaks.Add_Click({
 
     # reducing ram via regedit
     Write-Host "Using regedit to improve RAM performace..."
-    $ResultText.text = "`r`n" +"Using regedit to improve RAM performace..."
     Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_DXGIHonorFSEWindowsCompatible" -Type Hex -Value 00000000
     Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_HonorUserFSEBehaviorMode" -Type Hex -Value 00000000
     Set-ItemProperty -Path "HKLM:\System\GameConfigStore" -Name "GameDVR_EFSEFeatureFlags" -Type Hex -Value 00000000
@@ -327,8 +310,7 @@ $warptweaks.Add_Click({
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
     Write-Host "Disable News and Interests"
-    $ResultText.text = "`r`n" +"Disabling Extra Junk..."
-    Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
+     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     # Remove "News and Interest" from taskbar
     Set-ItemProperty -Path  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Type DWord -Value 2
 
@@ -453,11 +435,10 @@ foreach ($service in $services) {
 }
 
     Write-Host "Essential Tweaks Completed"
-    $ResultText.text = "`r`n" +"`r`n" + "Essential Tweaks Completed..."
+    $ResultText.text =  "Scotty: I dannae if she can take any more, Captain!... Disabling Cortana and Bloatware"
 
     Write-Host "Disabling Bing Search in Start Menu..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search..."
-    Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
+     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
     <#
     Write-Host "Disabling Cortana"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "CortanaConsent" -Type DWord -Value 0
@@ -535,20 +516,16 @@ foreach ($service in $services) {
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
 
     Write-Host "Search and Start Menu Tweaks Complete"
-    $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete..."
-    }
+     }
 
     Write-Host "Disabling Background application access..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Background application access..."
     Get-ChildItem -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" -Exclude "Microsoft.Windows.Cortana*" | ForEach {
         Set-ItemProperty -Path $_.PsPath -Name "Disabled" -Type DWord -Value 1
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
     Write-Host "Disabled Background application access"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background application access..."
 
     Write-Host "Disabling Cortana..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Cortana..."
     If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings")) {
         New-Item -Path "HKCU:\SOFTWARE\Microsoft\Personalization\Settings" -Force | Out-Null
     }
@@ -567,7 +544,6 @@ foreach ($service in $services) {
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana..."
 
 $Bloatware = @(
     #Sponsored Windows 10 AppX Apps
@@ -600,18 +576,15 @@ $Bloatware = @(
 )
 
     Write-Host "Removing Bloatware..."
-    $ResultText.text = "`r`n" +"`r`n" + "Removing Bloatware..."
 
     foreach ($Bloat in $Bloatware) {
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
         Write-Host "Trying to remove $Bloat."
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
     }
 
     Write-Host "Finished Removing Bloatware Apps"
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps..."
-    $ResultText.text = "`r`n" +"`r`n" + "Please Close and Reboot NOW to Apply Changes..."
+    $ResultText.text =  "Scotty: Aye and if my grandmother had wheels, she'd be a wagon... Please Close and Reboot NOW to Apply Changes."
 })
 
 [void]$Form.ShowDialog()

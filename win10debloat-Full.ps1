@@ -23,12 +23,12 @@ Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-
 Add-Type -Assembly System.Drawing
 $himage = [System.Drawing.Image]::FromFile("./hfimage.jpg")
 
-$Form                            = New-Object system.Windows.Forms.Form
-$Form.ClientSize                 = New-Object System.Drawing.Point(780,780)
-$Form.text                       = "Windows 10 De-Bloat - Full Edition"
-$Form.StartPosition              = "CenterScreen"
-$Form.TopMost                    = $false
-$Form.BackColor                  = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
+$Form                         = New-Object system.Windows.Forms.Form
+$Form.ClientSize              = New-Object System.Drawing.Point(780,780)
+$Form.text                    = "Windows 10 De-Bloat - Full Edition"
+$Form.StartPosition           = "CenterScreen"
+$Form.TopMost                 = $false
+$Form.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
 $Form.AutoScaleDimensions     = '192, 192'
 $Form.AutoScaleMode           = "Dpi"
 $Form.AutoSize                = $True
@@ -37,9 +37,9 @@ $Form.ClientSize              = '700, 700'
 $Form.FormBorderStyle         = 'FixedSingle'
 
 # GUI Icon
-$iconBase64                      = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAACQcICgP/xAArEAABBAEDAwQCAQUAAAAAAAACAQMEBQYHERIICSEAExQxFSIKIzI0QVL/xAAXAQEBAQEAAAAAAAAAAAAAAAAFBgME/8QAJhEAAQMDBAEEAwAAAAAAAAAAAQIDEQQhQQASEzFhBTJxsVGBof/aAAwDAQACEQMRAD8AIftadvXIO5x1l43pfSPFX17/ACsshtNuX4eqZIPkSETZeTn7g22K+CddaFVEVUkVTux9nbpX0H6akwzSvHa2t1SeciN0NxOzRCsLQkIVkuvtvzEB9tW+QezDhk97ytcARHUQol/j9dLDOSdLma5NgGqcii1eyt5ytt6KqajfmnscZQnEi15STBlqVMmsttrIdVWmWxEk4ueUtHpv0hysBnu2GsF5f6d2V8qvHpTp3fK7k89l5OCOZNlH+ZIdfBFQ2mjBokIvabb5mCcrz6wdrSZ8/f7HkjwZtpajoWFNl2pc2xjJnrBgHBAWclITBI662doHXzQ7TyVl0zBrS2xeBDCxl2FfFfQosUt0SScZ9tqSkfx5f9r2U8fv59Vk9bDejzt36OaC48zm1XpPhMHLrxPl/k3o62Vg0BqLgmU6abzxOEoi6rnJPKjsA7KPo4v5MHVjozhXT9d6Y1lDp/I1SyWYw40DGP1cuVTRUdRx6X8mO2BxH3eKCPMjNwHDXYBLdd29+0ckT40fUcXIeCduJif592+B1o0+lnXO+046Za9msqcaF6vsfkVmRNocO/oZTjj5/wBF1kh+QyYRDEgeQxFVT73BBYPpszKlmTcbyLJnZF7Gmz0tLUn+KyrNFdVH+SGXEjFxDbJOXFCbUd+O3rPnpzrW/h9IVTKbORAVV9sgVOcfflvsi+C8kq/afa+fO3qwrXc8XHqMo8GDbyJDpe86rNg/AZfd4oPuOA25sp7IiKSJuqJ6mFvepUlYSGS42qfaUgi8gmSBkgyZ6idVCW/TayiSkvBtxEe4Eg2ggRJ7AIgRc6Y7uVdxHJcxr7FWbayxHCW1QINRWH7V5kbg+difaUkbHluqttucUHZTJf7EAfq+yocs1NSQTsU5StkUhuOSE3GJTXi2ip/yKCnnz9KvlV9dNYetHONYJskn7A61mVuLiRnCV94F+hdfJVdc2Tx+xfXj1EpEpLuvlV8qq/79L06at10PPgISOkgyZOVGw6wJ+ToV9ylaaUxTysqiVEQIF4SLmJyYn8DX/9k='
-$iconBytes                       = [Convert]::FromBase64String($iconBase64)
-$stream                          = New-Object IO.MemoryStream($iconBytes, 0, $iconBytes.Length)
+$iconBase64                   = '/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAAgACADASIAAhEBAxEB/8QAGAABAAMBAAAAAAAAAAAAAAAACQcICgP/xAArEAABBAEDAwQCAQUAAAAAAAACAQMEBQYHERIICSEAExQxFSIKIzI0QVL/xAAXAQEBAQEAAAAAAAAAAAAAAAAFBgME/8QAJhEAAQMDBAEEAwAAAAAAAAAAAQIDEQQhQQASEzFhBTJxsVGBof/aAAwDAQACEQMRAD8AIftadvXIO5x1l43pfSPFX17/ACsshtNuX4eqZIPkSETZeTn7g22K+CddaFVEVUkVTux9nbpX0H6akwzSvHa2t1SeciN0NxOzRCsLQkIVkuvtvzEB9tW+QezDhk97ytcARHUQol/j9dLDOSdLma5NgGqcii1eyt5ytt6KqajfmnscZQnEi15STBlqVMmsttrIdVWmWxEk4ueUtHpv0hysBnu2GsF5f6d2V8qvHpTp3fK7k89l5OCOZNlH+ZIdfBFQ2mjBokIvabb5mCcrz6wdrSZ8/f7HkjwZtpajoWFNl2pc2xjJnrBgHBAWclITBI662doHXzQ7TyVl0zBrS2xeBDCxl2FfFfQosUt0SScZ9tqSkfx5f9r2U8fv59Vk9bDejzt36OaC48zm1XpPhMHLrxPl/k3o62Vg0BqLgmU6abzxOEoi6rnJPKjsA7KPo4v5MHVjozhXT9d6Y1lDp/I1SyWYw40DGP1cuVTRUdRx6X8mO2BxH3eKCPMjNwHDXYBLdd29+0ckT40fUcXIeCduJif592+B1o0+lnXO+046Za9msqcaF6vsfkVmRNocO/oZTjj5/wBF1kh+QyYRDEgeQxFVT73BBYPpszKlmTcbyLJnZF7Gmz0tLUn+KyrNFdVH+SGXEjFxDbJOXFCbUd+O3rPnpzrW/h9IVTKbORAVV9sgVOcfflvsi+C8kq/afa+fO3qwrXc8XHqMo8GDbyJDpe86rNg/AZfd4oPuOA25sp7IiKSJuqJ6mFvepUlYSGS42qfaUgi8gmSBkgyZ6idVCW/TayiSkvBtxEe4Eg2ggRJ7AIgRc6Y7uVdxHJcxr7FWbayxHCW1QINRWH7V5kbg+difaUkbHluqttucUHZTJf7EAfq+yocs1NSQTsU5StkUhuOSE3GJTXi2ip/yKCnnz9KvlV9dNYetHONYJskn7A61mVuLiRnCV94F+hdfJVdc2Tx+xfXj1EpEpLuvlV8qq/79L06at10PPgISOkgyZOVGw6wJ+ToV9ylaaUxTysqiVEQIF4SLmJyYn8DX/9k='
+$iconBytes                    = [Convert]::FromBase64String($iconBase64)
+$stream                       = New-Object IO.MemoryStream($iconBytes, 0, $iconBytes.Length)
 $stream.Write($iconBytes, 0, $iconBytes.Length)
 $Form.Icon                    = [System.Drawing.Icon]::FromHandle((New-Object System.Drawing.Bitmap -Argument $stream).GetHIcon())
 
@@ -112,7 +112,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 # Status Panel
 
 $Panel4                          = New-Object system.Windows.Forms.Panel
-$Panel4.height                   = 125
+$Panel4.height                   = 65
 $Panel4.width                    = 730
 $Panel4.location                 = New-Object System.Drawing.Point(20,390)
 
@@ -125,9 +125,8 @@ $Label10.location                = New-Object System.Drawing.Point(5,5)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $ResultText                      = New-Object system.Windows.Forms.TextBox
-$ResultText.multiline            = $true
 $ResultText.width                = 725
-$ResultText.height               = 90
+$ResultText.height               = 40
 $ResultText.location             = New-Object System.Drawing.Point(5,25)
 $ResultText.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',8)
 
@@ -152,11 +151,12 @@ $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 $essentialtweaks.Add_Click({
     Write-Host "Running O&O Shutup with Customised Settings"
-    $ResultText.text += "`r`n" +"Running O&O Shutup with Customised Settings"
+    $ResultText.text = "Running O&O Shutup with Customised Settings..."
     ./OOSU10.exe ooshutup10.cfg /quiet
-
+    
+    $ResultText.text = "Cleanup in Progress..."
+    
     Write-Host "Disabling Telemetry..."
-    $ResultText.text += "`r`n" +"Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
     Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
@@ -289,7 +289,6 @@ $essentialtweaks.Add_Click({
     }
 
     Write-Host "Changing default Explorer view to This PC..."
-    $ResultText.text += "`r`n" +"Quality of Life Tweaks"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
     Write-Host "Hiding 3D Objects icon from This PC..."
@@ -330,7 +329,6 @@ $essentialtweaks.Add_Click({
 	#Enable-WindowsOptionalFeature -Online -FeatureName "WindowsMediaPlayer" -NoRestart -WarningAction SilentlyContinue | Out-Null
 
     Write-Host "Disable News and Interests"
-    $ResultText.text += "`r`n" +"Disabling Extra Junk"
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" -Name "EnableFeeds" -Type DWord -Value 0
     # Remove "News and Interest" from taskbar
     Set-ItemProperty -Path  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Feeds" -Name "ShellFeedsTaskbarViewMode" -Type DWord -Value 2
@@ -456,12 +454,12 @@ foreach ($service in $services) {
 }
 
     Write-Host "Essential Tweaks Completed - Please Reboot"
-    $ResultText.text = "`r`n" + "Essential Tweaks Done" + "`r`n" + "`r`n" + "Ready for Next Task"
+    $ResultText.text = "Essential Tweaks Done... Ready for Next Task..."
 })
 
 $windowssearch.Add_Click({
     Write-Host "Disabling Bing Search in Start Menu..."
-    $ResultText.text = "`r`n" +"`r`n" + "Disabling Search, Cortana, Start menu search... Please Wait"
+    $ResultText.text = "Disabling Search, Cortana, Start menu search... Please Wait"
     Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
     <#
     Write-Host "Disabling Cortana"
@@ -540,7 +538,7 @@ $windowssearch.Add_Click({
         Set-ItemProperty -Path $keyPath -Name "LockedStartLayout" -Value 0
 
     Write-Host "Search and Start Menu Tweaks Complete"
-    $ResultText.text = "`r`n" +"`r`n" + "Search and Start Menu Tweaks Complete"
+    $ResultText.text = "Search and Start Menu Tweaks Complete..."
     }
 })
 
@@ -551,7 +549,7 @@ $backgroundapps.Add_Click({
         Set-ItemProperty -Path $_.PsPath -Name "DisabledByUser" -Type DWord -Value 1
     }
     Write-Host "Disabled Background application access"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Background application access"
+    $ResultText.text = "Disabled Background application access..."
 })
 
 $cortana.Add_Click({
@@ -574,7 +572,7 @@ $cortana.Add_Click({
     }
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search" -Name "AllowCortana" -Type DWord -Value 0
     Write-Host "Disabled Cortana"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Cortana"
+    $ResultText.text = "Disabled Cortana..."
 })
 
 $Bloatware = @(
@@ -614,11 +612,11 @@ $removebloat.Add_Click({
         Get-AppxPackage -Name $Bloat| Remove-AppxPackage
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online
         Write-Host "Trying to remove $Bloat."
-        $ResultText.text = "`r`n" +"`r`n" + "Trying to remove $Bloat."
+        $ResultText.text = "Trying to remove $Bloat..."
     }
 
     Write-Host "Finished Removing Bloatware Apps"
-    $ResultText.text = "`r`n" +"`r`n" + "Finished Removing Bloatware Apps"
+    $ResultText.text = "Finished Removing Bloatware Apps..."
 })
 
 $actioncenter.Add_Click({
@@ -629,37 +627,7 @@ $actioncenter.Add_Click({
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
     Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
     Write-Host "Disabled Action Center"
-    $ResultText.text = "`r`n" +"`r`n" + "Disabled Action Center"
-})
-
-$onedrive.Add_Click({
-    Write-Host "Disabling OneDrive..."
-    If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive")) {
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" | Out-Null
-    }
-    Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Name "DisableFileSyncNGSC" -Type DWord -Value 1
-    Write-Host "Uninstalling OneDrive..."
-    Stop-Process -Name "OneDrive" -ErrorAction SilentlyContinue
-    Start-Sleep -s 2
-    $onedrive = "$env:SYSTEMROOT\SysWOW64\OneDriveSetup.exe"
-    If (!(Test-Path $onedrive)) {
-        $onedrive = "$env:SYSTEMROOT\System32\OneDriveSetup.exe"
-    }
-    Start-Process $onedrive "/uninstall" -NoNewWindow -Wait
-    Start-Sleep -s 2
-    Stop-Process -Name "explorer" -ErrorAction SilentlyContinue
-    Start-Sleep -s 2
-    Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse -ErrorAction SilentlyContinue
-    If (!(Test-Path "HKCR:")) {
-        New-PSDrive -Name HKCR -PSProvider Registry -Root HKEY_CLASSES_ROOT | Out-Null
-    }
-    Remove-Item -Path "HKCR:\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "HKCR:\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" -Recurse -ErrorAction SilentlyContinue
-    Write-Host "Disabled OneDrive"
-    $ResultText.text = "`r`n" +"`r`n" + "Deleted and Disabled OneDrive"
+    $ResultText.text = "Disabled Action Center..."
 })
 
 $STrayIcons.Add_Click({
@@ -667,7 +635,7 @@ $STrayIcons.Add_Click({
 	Write-Host "Showing tray icons..."
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
 	Write-Host "Done - Now showing all tray icons"
-    $ResultText.text = "`r`n" +"`r`n" + "Tray Icons now set to show all"
+    $ResultText.text = "Tray Icons now set to show all..."
 })
 
 [void]$Form.ShowDialog()
