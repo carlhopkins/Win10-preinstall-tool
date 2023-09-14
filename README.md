@@ -1,19 +1,24 @@
 ## Windows 10 Pre-Installation De-Bloat Tool's ##
 
-See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for binary versions - **recommended**.
+Current Ver - 2.1.0
 
-Alternatively you can call scripts directly within Powershell using the below:- 
+See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for launchers - **Recommended!**.
 
-**Full** version, including O&O Shutup Routines
+Alternatively you can call directly within Powershell using the below:- 
 
-<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/win10debloat-Full.ps1 | iex</code>
+**Full** edition, with user selectable actions.
 
-**Lite** version, Windows 10 tweaks only
+<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/Win10DebloatFull.ps1 | iex</code>
 
-<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/win10debloat-Lite.ps1 | iex</code>
+**Warp** edition, *Warp Speed!* one-click action.
 
-**Warp** version, Windows 10 tweaks only, *warp speed!* one-click version
+<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/Win10DebloatWarp.ps1 | iex</code>
 
-<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/win10debloat-Warp.ps1 | iex</code>
+**Both** editions now include *Optional* command to install more "agressive" O&O Shutup based customisations...
+*Use with Caution - if unsure stick with defaults*
+
+--
+Note:
+**Lite** edition is now discontinued and no longer supported... Use **Full** and ignore option to install O&O Shutup Customisations.
 
 Copyright (c) 2022 Carl Hopkins

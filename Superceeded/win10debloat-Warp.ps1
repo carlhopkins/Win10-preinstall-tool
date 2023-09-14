@@ -1,4 +1,4 @@
-# Windows 10 Debloat Script - Warp version - Copyright (c) 2023 Carl Hopkins
+# Windows 10 Debloat Script - Warp Edition 2.1.0 - Copyright (c) 2023 Carl Hopkins
 
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -12,11 +12,17 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Exit
 }
 
-# GUI Specs
+# Init
+Write-Host "+===================================================+"
+Write-Host ".  Windows 10 Debloat Shell - Warp Edition 2.1.0    ."
+Write-Host "+===================================================+"
+Write-Host ""
 Write-Host "Loading, please wait..."
+Write-Host ""
 
 # Hack to load in required resources
 Import-Module BitsTransfer
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/OOSU/ooshutup10.cfg" -Destination ooshutup10.cfg
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/bimage.jpg" -Destination bimage.jpg
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/header_warp.jpg" -Destination hwimage.jpg
 Add-Type -Assembly System.Drawing
@@ -24,9 +30,10 @@ $bimage = [System.Drawing.Image]::FromFile("./bimage.jpg")
 Add-Type -Assembly System.Drawing
 $himage = [System.Drawing.Image]::FromFile("./hwimage.jpg")
 
+# GUI Specs
 $Form                         = New-Object system.Windows.Forms.Form
 $Form.ClientSize              = New-Object System.Drawing.Point(780,780)
-$Form.text                    = "Windows 10 De-Bloat - Warp Edition"
+$Form.text                    = "Windows 10 De-Bloat - Warp Edition 2.1.0"
 $Form.StartPosition           = "CenterScreen"
 $Form.TopMost                 = $false
 $Form.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
@@ -50,14 +57,14 @@ $Form.Height                  = $objImage.Height
 #Panel1 - L/H Spacer
 
 $Panel1                          = New-Object system.Windows.Forms.Panel
-$Panel1.height                   = 250
+$Panel1.height                   = 340
 $Panel1.width                    = 250
 $Panel1.location                 = New-Object System.Drawing.Point(5,75)
 
 #Panel2 - Actions
 
 $Panel2                          = New-Object system.Windows.Forms.Panel
-$Panel2.height                   = 250
+$Panel2.height                   = 340
 $Panel2.width                    = 250
 $Panel2.location                 = New-Object System.Drawing.Point(265,75)
 
@@ -68,10 +75,17 @@ $warptweaks.height               = 205
 $warptweaks.location             = New-Object System.Drawing.Point(5,10)
 $warptweaks.Font                 = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
+$ooshutup                        = New-Object system.Windows.Forms.Button
+$ooshutup.text                   = "Run O&O Shutup Customisations"
+$ooshutup.width                  = 205
+$ooshutup.height                 = 70
+$ooshutup.location               = New-Object System.Drawing.Point(5,240)
+$ooshutup.Font                   = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
+
 #Panel3 - R/H Spacer
 
 $Panel3                          = New-Object system.Windows.Forms.Panel
-$Panel3.height                   = 250
+$Panel3.height                   = 340
 $Panel3.width                    = 250
 $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 
@@ -80,7 +94,7 @@ $Panel3.location                 = New-Object System.Drawing.Point(525,75)
 $Panel4                          = New-Object system.Windows.Forms.Panel
 $Panel4.height                   = 65
 $Panel4.width                    = 730
-$Panel4.location                 = New-Object System.Drawing.Point(20,320)
+$Panel4.location                 = New-Object System.Drawing.Point(20,410)
 
 $Label10                         = New-Object system.Windows.Forms.Label
 $Label10.text                    = "Current Status:"
@@ -91,7 +105,6 @@ $Label10.location                = New-Object System.Drawing.Point(5,5)
 $Label10.Font                    = New-Object System.Drawing.Font('Microsoft Sans Serif',10)
 
 $ResultText                      = New-Object system.Windows.Forms.TextBox
-#$ResultText.multiline            = true
 $ResultText.width                = 725
 $ResultText.height               = 40
 $ResultText.location             = New-Object System.Drawing.Point(5,25)
@@ -113,13 +126,20 @@ $PictureBox1.SizeMode            = [System.Windows.Forms.PictureBoxSizeMode]::zo
 
 $Form.controls.AddRange(@($Panel0,$Panel1,$Panel2,$Panel3,$Panel4))
 $Panel0.controls.AddRange(@($PictureBox1))
-$Panel2.controls.AddRange(@($warptweaks))
+$Panel2.controls.AddRange(@($warptweaks,$ooshutup))
 $Panel4.controls.AddRange(@($Label10,$ResultText))
 
-#Main routine, options as per "Lite" but more verbose and chained into one single function.
+Write-Host "Version 2.1.0 - System Ready... Please Select a Task..."
+$ResultText.text = "Version 2.1.0 - System Ready... Please Select a Task..."
+
+$ooshutup.Add_Click({
+    Write-Host "Running O&O Shutup with Customised Settings"
+    $ResultText.text = "Running O&O Shutup with Customised Settings..."
+    ./OOSU10.exe ooshutup10.cfg /quiet
+})
 
 $warptweaks.Add_Click({
-    $ResultText.text = "Scotty: But ye don't have eight weeks, so I'll do it for ye in two... Cleanup in Progress"
+    $ResultText.text = "Scotty: But ye don't have eight weeks, so I'll do it for ye in two... Cleanup in Progress..."
     
     Write-Host "Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
@@ -435,7 +455,7 @@ foreach ($service in $services) {
 }
 
     Write-Host "Essential Tweaks Completed"
-    $ResultText.text =  "Scotty: I dannae if she can take any more, Captain!... Disabling Cortana and Bloatware"
+    $ResultText.text =  "Scotty: I dannae if she can take any more, Captain!... Disabling Cortana and Bloatware..."
 
     Write-Host "Disabling Bing Search in Start Menu..."
      Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Search" -Name "BingSearchEnabled" -Type DWord -Value 0
@@ -584,7 +604,7 @@ $Bloatware = @(
     }
 
     Write-Host "Finished Removing Bloatware Apps"
-    $ResultText.text =  "Scotty: Aye and if my grandmother had wheels, she'd be a wagon... Please Close and Reboot NOW to Apply Changes."
+    $ResultText.text =  "Scotty: Aye and if my grandmother had wheels, she'd be a wagon... Please Close and Reboot NOW to Apply Changes..."
 })
 
 [void]$Form.ShowDialog()
