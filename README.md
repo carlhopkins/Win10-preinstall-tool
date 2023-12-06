@@ -12,4 +12,4 @@ Note:
 
 **Lite** and **Warp** editions are now discontinued and no longer supported.
 
-With thanks to **Chris Titus**, for original script source and inspiration - (https://github.com/ChrisTitusTech)
+With thanks to [Chris Titus](https://github.com/ChrisTitusTech), for original script source and inspiration.
