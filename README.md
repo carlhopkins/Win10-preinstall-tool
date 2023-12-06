@@ -2,7 +2,7 @@
 
 **Current Ver - v3.11**
 
-See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for launchers - **Recommended!**.
+See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for batchfile - **Recommended!**.
 
 Alternatively you can call directly within Powershell using the below:- 
 
