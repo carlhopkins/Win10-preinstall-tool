@@ -1,5 +1,5 @@
-# Windows 10 Debloat Script - v3.11 - Copyright (c) 2022 Carl Hopkins
-# Not for workgroups!
+# Windows 10 Machine Pre-Installation PreP Tool - Copyright (c) 2023 Carl Hopkins
+# Release v4.1
 
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -15,7 +15,7 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 
 # Init
 Write-Host "+===================================================+"
-Write-Host ".          Windows 10 Debloat Shell - v3.11         ."
+Write-Host ".             Windows 10 PreP Tool Shell            ."
 Write-Host "+===================================================+"
 Write-Host ""
 Write-Host "Loading, please wait..."
@@ -23,16 +23,16 @@ Write-Host ""
 
 # Hack to load in required resources
 Import-Module BitsTransfer
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/current/ooshutup10.cfg" -Destination ooshutup10.cfg
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/current/OOSU10.exe" -Destination OOSU10.exe
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/current/hfimage.jpg" -Destination hfimage.jpg
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/OOSPreP.cfg" -Destination OOSPreP.cfg
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/OOSU10.exe" -Destination OOSU10.exe
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/himage.jpg" -Destination hfimage.jpg
 Add-Type -Assembly System.Drawing
-$himage = [System.Drawing.Image]::FromFile("./hfimage.jpg")
+$himage = [System.Drawing.Image]::FromFile("./himage.jpg")
 
 # GUI Specs
 $Form                         = New-Object system.Windows.Forms.Form
 $Form.ClientSize              = New-Object System.Drawing.Point(780,780)
-$Form.text                    = "Windows 10 De-Bloat - 2.2.0"
+$Form.text                    = "Windows 10 PreP Tool"
 $Form.StartPosition           = "CenterScreen"
 $Form.TopMost                 = $false
 $Form.BackColor               = [System.Drawing.ColorTranslator]::FromHtml("#e9e9e9")
@@ -159,8 +159,8 @@ $Panel4.controls.AddRange(@($Label10,$ResultText))
 
 # Beginning of functions
 
-Write-Host "Version 3.11 - System Ready... Please Select a Task..."
-$ResultText.text = "Version 3.11 - System Ready... Please Select a Task..."
+Write-Host "Windows 10 PreP Tool Ready... Please Select a Task..."
+$ResultText.text = "Windows 10 PreP Tool Ready... Please Select a Task..."
 
 $essentialtweaks.Add_Click({
 Write-Host "Cleanup in Progress..."
@@ -168,7 +168,7 @@ Write-Host "Cleanup in Progress..."
 
 Write-Host "Running O&O Shutup with Customised Settings"
     $ResultText.text = "Running O&O Shutup with Customised Settings..."
-    ./OOSU10.exe ooshutup10.cfg /quiet    
+    ./OOSU10.exe OOSPreP.cfg /quiet    
 
 Write-Host "Disabling Telemetry..."
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
@@ -477,8 +477,8 @@ Write-Host "Setting $service StartupType to Manual"
     Get-Service -Name $service -ErrorAction SilentlyContinue | Set-Service -StartupType Manual
 }
 
-Write-Host "Essential Tweaks Done... Ready for Next Task..."
-    $ResultText.text = "Essential Tweaks Done... Ready for Next Task..."
+Write-Host "Ready for Next Task..."
+    $ResultText.text = "Ready for Next Task..."
 })
 
 $windowssearch.Add_Click({

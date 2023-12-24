@@ -1,15 +1,15 @@
 ## Windows 10 Machine Pre-Installation PreP Tool ##
 
-**Current Ver - v3.11**
+**Current Ver - v4.1**
 
-See [Releases](https://github.com/carlhopkins/Win10-preinstall-tool/releases) for batchfile - **Recommended!**.
+Use batchfile to launch utility directly.
 
-Alternatively you can call directly within Powershell using the below:- 
+Alternatively you can call directly within Powershell (elevated) using the below:- 
 
-<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/current/Win10Debloat.ps1 | iex</code>
+<code>iwr -useb https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/Win10PreP.ps1 | iex</code>
 
 Note:
 
-**Lite** and **Warp** editions are now discontinued and no longer supported.
+Based upon Windows 10 PreP script by [Carl Hopkins](https://github.com/bitterblitter).
 
 With thanks to [Chris Titus](https://github.com/ChrisTitusTech), for original script source and inspiration.
