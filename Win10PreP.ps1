@@ -25,7 +25,7 @@ Write-Host ""
 Import-Module BitsTransfer
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/OOSPreP.cfg" -Destination OOSPreP.cfg
 Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/OOSU10.exe" -Destination OOSU10.exe
-Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/himage.jpg" -Destination hfimage.jpg
+Start-BitsTransfer -Source "https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/assets/himage.jpg" -Destination himage.jpg
 Add-Type -Assembly System.Drawing
 $himage = [System.Drawing.Image]::FromFile("./himage.jpg")
 
