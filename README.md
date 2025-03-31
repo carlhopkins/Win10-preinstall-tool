@@ -6,7 +6,7 @@ Use batchfile to launch utility directly.
 
 Alternatively you can call directly within Powershell (elevated) using the below:- 
 
-<code>iwr -useb https://raw.githubusercontent.com/bitterblitter/Win10-preinstall-tool/main/Win10PreP.ps1 | iex</code>
+<code>iwr -useb https://raw.githubusercontent.com/carlhopkins/Win10-preinstall-tool/main/Win10PreP.ps1 | iex</code>
 
 Note:
 
